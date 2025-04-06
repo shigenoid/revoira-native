@@ -27,6 +27,17 @@ const Login = () => {
   const fontsLoaded = useCustomFonts();
   
   const handleLogin = async () => {
+    // Trim inputs
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+  
+    // Check for empty fields
+    if (!trimmedEmail || !trimmedPassword) {
+      alert('Email and password can\'t be blank.');
+      setIsLoading(false);
+      return;
+    }
+  
     setIsLoading(true);
     try {
       const response = await fetch('https://revoira.vercel.app/login', {
@@ -34,19 +45,28 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }),
       });
-
+  
       const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
       
       if (data.success) {
         navigation.navigate('Dashboard');
       } else {
-        alert('Invalid credentials');
+        alert(data.message || 'Invalid credentials');
       }
-    } catch (err) {
-      console.error(err);
-      alert('Login failed. Please try again.');
+    } catch (error) {
+      console.error(error);
+      // Proper type narrowing for the error
+      if (error instanceof Error) {
+        alert(error.message || 'Login failed. Please try again.');
+      } else {
+        alert('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -103,6 +123,7 @@ const Login = () => {
             placeholder="Enter your password"
             placeholderTextColor="rgba(255, 255, 255, 0.7)"
             secureTextEntry
+            maxLength={30}
           />
         </View>
 
