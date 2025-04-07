@@ -5,33 +5,34 @@ import {
   TextInput, 
   TouchableOpacity, 
   Image,
-  StyleSheet,
   ScrollView,
   ActivityIndicator
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './styles/Login';
-import useCustomFonts from '../hooks/useFonts';
+import useCustomFonts from '../../hooks/useFonts';
+import { AuthStackParamList, RootStackParamList } from '../../navigation/types';
 
-type RootStackParamList = {
-  Dashboard: undefined;
-  Register: undefined;
+// Create a union type for navigation props
+type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'> & {
+  reset: (params: {
+    index: number;
+    routes: { name: keyof RootStackParamList }[];
+  }) => void;
 };
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
   const fontsLoaded = useCustomFonts();
   
   const handleLogin = async () => {
-    // Trim inputs
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
   
-    // Check for empty fields
     if (!trimmedEmail || !trimmedPassword) {
       alert('Email and password can\'t be blank.');
       setIsLoading(false);
@@ -55,13 +56,16 @@ const Login = () => {
       }
       
       if (data.success) {
-        navigation.navigate('Dashboard');
+        // Reset navigation to Main stack
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Main' }],
+        });
       } else {
         alert(data.message || 'Invalid credentials');
       }
     } catch (error) {
       console.error(error);
-      // Proper type narrowing for the error
       if (error instanceof Error) {
         alert(error.message || 'Login failed. Please try again.');
       } else {
@@ -90,7 +94,7 @@ const Login = () => {
       <View style={styles.header}>
         <View style={styles.logo}>
           <Image 
-            source={require('../assets/images/logo.png')}
+            source={require('../../assets/images/logo.png')}
             style={styles.logoImage}
           />
         </View>

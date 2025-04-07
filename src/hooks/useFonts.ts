@@ -9,7 +9,7 @@ import {
 export default function useCustomFonts() {
   const [fontsLoaded] = useFonts({
     'samsung-light': require('../assets/fonts/samsungsharpsans.otf'),
-    'samsung-medium': require('../assets/fonts/samsungsharpsans.otf'),
+    'samsung-medium': require('../assets/fonts/samsungsharpsans-medium.otf'),
     'samsung-bold': require('../assets/fonts/samsungsharpsans-bold.otf'),
     'Poppins-Light': Poppins_300Light,
     'Poppins-Regular': Poppins_400Regular,

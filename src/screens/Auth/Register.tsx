@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './styles/Register';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import useCustomFonts from '../hooks/useFonts';
+import useCustomFonts from '../../hooks/useFonts';
 
 type RootStackParamList = {
   Login: undefined;
