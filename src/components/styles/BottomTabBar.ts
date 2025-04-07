@@ -1,27 +1,36 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    height: 80,
-    backgroundColor: '#57723a',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 10,
-  },
+    container: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 80,
+        backgroundColor: '#57723a',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        flexDirection: 'row', // ← this guarantees layout
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 10,
+        zIndex: 10,
+      },
+      
   tabButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 10,
+    flexGrow: 1,
+    flexBasis: 0,
   },
+  
   connectButton: {
     backgroundColor: '#57723a',
     borderRadius: 30,

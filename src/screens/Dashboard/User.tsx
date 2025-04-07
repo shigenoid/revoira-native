@@ -6,7 +6,6 @@ const UserScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User Profile</Text>
-      {/* Your user screen content */}
     </View>
   );
 };

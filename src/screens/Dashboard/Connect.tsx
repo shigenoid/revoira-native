@@ -6,7 +6,6 @@ const ConnectScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Connect Screen</Text>
-      {/* Your connect screen content */}
     </View>
   );
 };
