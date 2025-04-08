@@ -83,24 +83,27 @@ const Register = () => {
       });
   
       const data = await response.json();
-      
+  
       if (!response.ok) {
-        throw new Error('Registration failed');
+        // Show error message from backend if available
+        if (data && data.message) {
+          alert(data.message); // e.g., "Email already exists"
+        } else {
+          alert('Registration failed. Please try again.');
+        }
+        return; // Stop here to prevent further actions
       }
   
       alert('Account created successfully!');
       navigation.navigate('Login');
     } catch (error) {
       console.error(error);
-      if (error instanceof Error) {
-        alert('Registration failed. Please try again.');
-      } else {
-        alert('An unexpected error occurred. Please try again.');
-      }
+      alert('An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+  
   
   
 
