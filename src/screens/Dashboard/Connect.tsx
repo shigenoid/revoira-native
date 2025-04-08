@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
+import { styles } from './styles/Connect';
 
 const API_BASE_URL = "https://revoira.vercel.app"; // Replace with your actual API URL
 
@@ -113,68 +114,3 @@ export default function ConnectScreen() {
     </View>
   );
 }
-
-const size = 250;
-const borderLength = 30;
-const borderWidth = 4;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  frameContainer: {
-    width: size,
-    height: size,
-    position: 'relative',
-  },
-  corner: {
-    width: borderLength,
-    height: borderLength,
-    borderColor: 'white',
-    position: 'absolute',
-    borderRadius: 4,
-  },
-  tl: {
-    top: 0,
-    left: 0,
-    borderTopWidth: borderWidth,
-    borderLeftWidth: borderWidth,
-  },
-  tr: {
-    top: 0,
-    right: 0,
-    borderTopWidth: borderWidth,
-    borderRightWidth: borderWidth,
-  },
-  bl: {
-    bottom: 0,
-    left: 0,
-    borderBottomWidth: borderWidth,
-    borderLeftWidth: borderWidth,
-  },
-  br: {
-    bottom: 0,
-    right: 0,
-    borderBottomWidth: borderWidth,
-    borderRightWidth: borderWidth,
-  },
-  gradient: {
-    position: 'absolute',
-    bottom: 0,
-    height: 200,
-    width: Dimensions.get('window').width,
-  },
-  rescanText: {
-    marginTop: 20,
-    color: 'white',
-    fontSize: 16,
-    padding: 8,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 10,
-  },
-});
