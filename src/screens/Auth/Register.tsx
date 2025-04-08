@@ -37,22 +37,37 @@ const Register = () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
     const trimmedConfirmPassword = confirmPassword.trim();
-
+  
+    const isValidEmail = (email: string) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+  
     if (!trimmedUsername || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
       alert('Please fill in all the fields');
       return;
     }
-
-    if (trimmedPassword !== trimmedConfirmPassword) {
-      alert('Passwords do not match!');
+  
+    if (!isValidEmail(trimmedEmail)) {
+      alert('Please enter a valid email address');
       return;
     }
-
+  
+    if (trimmedPassword.length < 8) {
+      alert('Password must be at least 8 characters long');
+      return;
+    }
+  
     if (trimmedPassword.length > 26) {
       alert('Password cannot exceed 26 characters');
       return;
     }
-
+  
+    if (trimmedPassword !== trimmedConfirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+  
     setIsLoading(true);
     try {
       const response = await fetch('https://revoira.vercel.app/register', {
@@ -66,13 +81,13 @@ const Register = () => {
           Password: trimmedPassword
         }),
       });
-
+  
       const data = await response.json();
       
       if (!response.ok) {
         throw new Error('Registration failed');
       }
-
+  
       alert('Account created successfully!');
       navigation.navigate('Login');
     } catch (error) {
@@ -86,6 +101,8 @@ const Register = () => {
       setIsLoading(false);
     }
   };
+  
+  
 
   const handleLogin = () => {
     navigation.navigate('Login');
