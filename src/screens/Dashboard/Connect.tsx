@@ -4,10 +4,10 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles/Connect';
 
-const API_BASE_URL = "https://revoira.vercel.app"; // Replace with your actual API URL
+const API_BASE_URL = "https://revoira.vercel.app"; 
 
 export default function ConnectScreen() {
-  const [facing, setFacing] = useState<'front' | 'back'>('back'); // ✅ FIXED
+  const [facing, setFacing] = useState<'front' | 'back'>('back'); 
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
 
@@ -88,7 +88,7 @@ export default function ConnectScreen() {
     <View style={styles.container}>
       <CameraView
         style={StyleSheet.absoluteFill}
-        facing={facing} // ✅ This will now work with 'back'
+        facing={facing} 
         onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
         barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
       >

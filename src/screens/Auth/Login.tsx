@@ -34,8 +34,7 @@ const Login = () => {
     const trimmedPassword = password.trim();
   
     if (!trimmedEmail || !trimmedPassword) {
-      alert('Email and password can\'t be blank.');
-      setIsLoading(false);
+      alert("Email and password can't be blank.");
       return;
     }
   
@@ -50,27 +49,19 @@ const Login = () => {
       });
   
       const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+  
+      if (!response.ok || !data.success) {
+        alert(data.message);
+        return;
       }
-      
-      if (data.success) {
-        // Reset navigation to Main stack
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Main' }],
-        });
-      } else {
-        alert(data.message || 'Invalid credentials');
-      }
+  
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Main' }],
+      });
     } catch (error) {
       console.error(error);
-      if (error instanceof Error) {
-        alert(error.message || 'Login failed. Please try again.');
-      } else {
-        alert('An unexpected error occurred. Please try again.');
-      }
+      alert("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }

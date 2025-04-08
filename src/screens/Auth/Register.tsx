@@ -39,7 +39,7 @@ const Register = () => {
     const trimmedConfirmPassword = confirmPassword.trim();
 
     if (!trimmedUsername || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
-      alert('Please fill in all fields');
+      alert('Please fill in all the fields');
       return;
     }
 
@@ -70,7 +70,7 @@ const Register = () => {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error('Registration failed');
       }
 
       alert('Account created successfully!');
@@ -78,7 +78,7 @@ const Register = () => {
     } catch (error) {
       console.error(error);
       if (error instanceof Error) {
-        alert(error.message || 'Registration failed. Please try again.');
+        alert('Registration failed. Please try again.');
       } else {
         alert('An unexpected error occurred. Please try again.');
       }
