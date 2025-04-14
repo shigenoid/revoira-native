@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginVertical: 15, 
     maxHeight: 105, 
+    paddingBottom: 5,
   },
   statsSection: {
     flex: 1,
