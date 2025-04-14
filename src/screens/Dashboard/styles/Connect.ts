@@ -63,4 +63,13 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 10,
   },
+  flashButton: {
+    position: 'absolute',
+    top: 40, // Adjust as needed
+    right: 20, // Adjust as needed
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+    padding: 10,
+    zIndex: 10,
+  },
 });

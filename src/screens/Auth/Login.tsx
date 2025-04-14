@@ -13,6 +13,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './styles/Login';
 import useCustomFonts from '../../hooks/useFonts';
 import { AuthStackParamList, RootStackParamList } from '../../navigation/types';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Create a union type for navigation props
 type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'> & {
@@ -28,6 +29,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const fontsLoaded = useCustomFonts();
+  const { login } = useAuth();
   
   const handleLogin = async () => {
     const trimmedEmail = email.trim();
@@ -53,6 +55,11 @@ const Login = () => {
       if (!response.ok || !data.success) {
         alert(data.message);
         return;
+      }
+
+      // Store user data in context
+      if (data.user) {
+        login(data.user); // This updates the AuthContext
       }
   
       navigation.reset({

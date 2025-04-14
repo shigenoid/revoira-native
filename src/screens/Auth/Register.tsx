@@ -129,7 +129,7 @@ const Register = () => {
 
         <View style={styles.form}>
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Nama Panggilan/Lengkap*</Text>
+            <Text style={styles.label}>Full/Nickname*</Text>
             <TextInput
               style={styles.input}
               value={username}
