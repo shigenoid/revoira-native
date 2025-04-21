@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles/Connect';
 
-const API_BASE_URL = "https://revoira.vercel.app"; 
+const API_BASE_URL = "https://revoira.vercel.app";
 
 export default function ConnectScreen() {
   const [facing, setFacing] = useState<'front' | 'back'>('back'); 

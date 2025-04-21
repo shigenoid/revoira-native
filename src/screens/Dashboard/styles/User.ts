@@ -8,11 +8,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 80,
   },
-  title: {
-    fontSize: 24,
-    fontFamily: 'samsung-bold',
-    color: '#fff',
+  image: {
+    width: 200,
+    height: 250,
+    resizeMode: 'contain',
     marginBottom: 20,
   },
-  // Add more styles as needed
+  maintenanceText: {
+    fontSize: 18,
+    fontFamily: 'samsung-bold',
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: 30,
+  },
 });
