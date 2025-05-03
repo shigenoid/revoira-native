@@ -64,7 +64,7 @@ export default function ConnectScreen() {
   const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
 
-    if (data === "FreeMyBoyBuckley") {
+    if (data === "bit.ly/RevoiraApp") {
       handleValidScan();
     }
   };
