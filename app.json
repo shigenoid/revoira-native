@@ -16,20 +16,19 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.monjaw.revoira", 
+      "package": "com.monjaw.revoira",
       "versionCode": 1,
-      "adaptiveIcon": {
+      "adaptiveIcon": { 
         "foregroundImage": "./src/assets/images/logo.png",
-        "backgroundColor": "#ffffff"
-      },
+        "backgroundColor": "#4AB847" },
       "permissions": [
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO" 
       ],
       "intentFilters": [
-        {
+        { 
           "action": "VIEW",
-          "data": [{ "scheme": "revoira" }],
+          "data": [{"scheme": "revoira"}],
           "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
@@ -53,6 +52,12 @@
         "projectId": "ba52ad1a-3c21-44b3-8ef1-7a9c646dd987"
       }
     },
-    "owner": "shigenoid"
+    "owner": "shigenoid",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ba52ad1a-3c21-44b3-8ef1-7a9c646dd987"
+    }
   }
 }
