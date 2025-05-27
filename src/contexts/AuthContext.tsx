@@ -4,6 +4,7 @@ type User = {
   uid: string;
   username: string;
   email: string;
+  point: number;
 };
 
 type AuthContextType = {

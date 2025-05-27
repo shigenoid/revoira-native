@@ -15,7 +15,6 @@ import useCustomFonts from '../../hooks/useFonts';
 import { AuthStackParamList, RootStackParamList } from '../../navigation/types';
 import { useAuth } from '../../contexts/AuthContext';
 
-// Create a union type for navigation props
 type LoginScreenNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'> & {
   reset: (params: {
     index: number;
@@ -57,9 +56,14 @@ const Login = () => {
         return;
       }
 
-      // Store user data in context
+      // Extract user data with points
       if (data.user) {
-        login(data.user); // This updates the AuthContext
+        login({
+          uid: data.user.uid,
+          username: data.user.username,
+          email: data.user.email,
+          point: data.user.point // Map backend 'point' to frontend 'points'
+        });
       }
   
       navigation.reset({
@@ -74,6 +78,7 @@ const Login = () => {
     }
   };
 
+  // Rest of the component remains the same...
   const handleRegister = () => {
     navigation.navigate('Register');
   };

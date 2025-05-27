@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { 
+  View, 
+  Text, 
+  Image, 
+  TouchableOpacity, 
+  RefreshControl, 
+  ScrollView 
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "./styles/Home";
 import { useAuth } from "../../contexts/AuthContext";
@@ -8,14 +15,31 @@ import RedeemModal from "../../components/RedeemModal";
 const HomeScreen = () => {
   const { user } = useAuth();
   const [isRedeemModalVisible, setRedeemModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    // Simulate refresh - in real implementation you would fetch new data here
+    setTimeout(() => setRefreshing(false), 1000);
+  };
 
   return (
-    <View style={styles.container}>
-      {/* Top Section with line break */}
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          tintColor="#57723a"
+          colors={["#57723a"]}
+        />
+      }
+    >
+      {/* Top Section */}
       <View style={styles.profileSection}>
         <View style={styles.profileImageContainer}>
           <Image
-            source={require("../../assets/images/pfp-dummy.jpeg")} // Path to your image
+            source={require("../../assets/images/pfp-dummy.jpeg")}
             style={styles.profileImagePlaceholder}
           />
         </View>
@@ -27,22 +51,22 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      {/* Compact Stats Section */}
+      {/* Stats Section */}
       <View style={styles.statsContainer}>
         <View style={styles.statsSection}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>26</Text>
+            <Text style={styles.statNumber}>*</Text>
             <Text style={styles.statLabel}>Items Recycled</Text>
           </View>
           <View style={styles.divider} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>310</Text>
+            <Text style={styles.statNumber}>{user?.point || 0}</Text>
             <Text style={styles.statLabel}>Points</Text>
           </View>
         </View>
       </View>
 
-      {/* Updated Buttons Section - Horizontal layout */}
+      {/* Buttons Section */}
       <View style={styles.buttonsSection}>
         <TouchableOpacity
           style={styles.button}
@@ -67,7 +91,7 @@ const HomeScreen = () => {
         visible={isRedeemModalVisible}
         onClose={() => setRedeemModalVisible(false)}
       />
-    </View>
+    </ScrollView>
   );
 };
 

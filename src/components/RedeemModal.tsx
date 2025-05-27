@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { styles } from './styles/RedeemModal';
+import { useAuth } from "../contexts/AuthContext";
 
 type RedeemModalProps = {
   visible: boolean;
@@ -21,6 +22,7 @@ type RedeemModalProps = {
 
 const RedeemModal: React.FC<RedeemModalProps> = ({ visible, onClose }) => {
     const [code, setCode] = useState('');
+    const { user } = useAuth();
     const slideAnim = useRef(new Animated.Value(500)).current;
     const panY = useRef(new Animated.Value(0)).current;
     
@@ -73,15 +75,33 @@ const RedeemModal: React.FC<RedeemModalProps> = ({ visible, onClose }) => {
       extrapolate: 'clamp',
     });
 
-    const handleVerify = () => {
-        Alert.alert(
-            "Success",
-            "Code redeemed successfully!",
-            [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
-        );
-    };
+   const handleVerify = async () => {
+  if (!code.trim()) {
+    return Alert.alert("Error", "Please enter a code.");
+  }
+  try {
+    const response = await fetch("https://revoira.vercel.app/redeem-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid: user?.uid,
+        code: code.trim(),
+      }),
+    });
+    const data = await response.json();
+    if (response.ok && data.success) {
+      Alert.alert(
+        "Success",
+        `Code redeemed! You received ${data.addedPoints} points.`,
+        [{ text: "OK", onPress: () => onClose() }]
+      );
+    } else {
+      Alert.alert("Error", data.message || "Failed to redeem code.");
+    }
+  } catch (err: any) {
+    Alert.alert("Error", err.message ?? String(err));
+  }
+};
 
     return (
       <Modal
